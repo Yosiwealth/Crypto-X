@@ -156,17 +156,4 @@
 
     </LinearLayout>
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="20dp"
-        android:clickable="true"
-        android:elevation="50dp"
-        android:src="@drawable/conversion"
-        app:layout_anchor="@id/inner_layout"
-        app:layout_anchorGravity="right|end|bottom"
-        app:rippleColor="#e20651" />
-
 </android.support.design.widget.CoordinatorLayout>
