@@ -36,7 +36,6 @@ public class ConvertClassBTC extends AppCompatActivity {
     EditText cryptocoins;
     EditText countryCurrency;
 
-    int currencies;
     int cryptos;
 
     RequestQueue requestQueue;
@@ -69,7 +68,6 @@ public class ConvertClassBTC extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         aaa = (TextView) findViewById(R.id.aaa);
         bbb = (TextView) findViewById(R.id.bbb);
         cryptocoins = (EditText) findViewById(R.id.crypto);
@@ -80,184 +78,175 @@ public class ConvertClassBTC extends AppCompatActivity {
         final DecimalFormat df2 = new DecimalFormat(".##");
 
         //set App title
-        getSupportActionBar().setTitle("Convert");
+        getSupportActionBar().setTitle("Convert BTC");
 
         loadBTCValue();
 
         ArrayAdapter<String> cryptoArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, CRYPTOLIST);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner1.setAdapter(cryptoArrayAdapter);
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String spinner1Value = spinner1.getSelectedItem().toString();
+                aaa.setText(spinner1Value);
+
+                Object crypto = adapterView.getItemAtPosition(i);
+                switch (i) {
+                    case 0:
+                        cryptos = 1;
+                        cryptocoins.setText("" + cryptos);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         ArrayAdapter<String> currencyArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, CURRENCYLIST);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
         spinner2.setAdapter(currencyArrayAdapter);
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "CONVERTING", Toast.LENGTH_LONG).show();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String spinner2Value = spinner2.getSelectedItem().toString();
+                bbb.setText(spinner2Value);
 
-                        String spinner1Value = spinner1.getSelectedItem().toString();
-                        aaa.setText(spinner1Value);
+                Object currency = adapterView.getItemAtPosition(i);
+                switch (i) {
+                    case 0:
+                        double value1 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result1 = exchangeRateUSD * value1;
+                        countryCurrency.setText("" + df2.format(result1));
+                        break;
 
-                        Object crypto = adapterView.getItemAtPosition(i);
-                        switch (i) {
-                            case 0:
-                                cryptos = 1;
-                                cryptocoins.setText("" + cryptos);
-                                break;
-                        }
-                    }
+                    case 1:
+                        double value2 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result2 = exchangeRateEUR * value2;
+                        countryCurrency.setText("" + df2.format(result2));
+                        break;
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    case 2:
+                        double value3 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result3 = value3 * exchangeRateNGN;
+                        countryCurrency.setText("" + df2.format(result3));
+                        break;
 
-                    }
-                });
+                    case 3:
+                        double value4 = Double.parseDouble(cryptocoins.getText().toString());
+                        Double result4 = value4 * exchangeRateCAD;
+                        countryCurrency.setText("" + df2.format(result4));
+                        break;
 
-                spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    case 4:
+                        double value5 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result5 = value5 * exchangeRateGBP;
+                        countryCurrency.setText("" + df2.format(result5));
+                        break;
 
-                        String spinner2Value = spinner2.getSelectedItem().toString();
-                        bbb.setText(spinner2Value);
+                    case 5:
+                        double value6 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result6 = value6 * exchangeRateCNY;
+                        countryCurrency.setText("" + df2.format(result6));
+                        break;
 
-                        Object currency = adapterView.getItemAtPosition(i);
-                        switch (i) {
-                            case 0:
-                                double value1 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result1 = exchangeRateUSD * value1;
-                                countryCurrency.setText("" + df2.format(result1));
-                                break;
+                    case 6:
+                        double value7 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result7 = value7 * exchangeRateCHF;
+                        countryCurrency.setText("" + df2.format(result7));
+                        break;
 
-                            case 1:
-                                double value2 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result2 = exchangeRateEUR * value2;
-                                countryCurrency.setText("" + df2.format(result2));
-                                break;
+                    case 7:
+                        double value8 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result8 = value8 * exchangeRateAUD;
+                        countryCurrency.setText("" + df2.format(result8));
+                        break;
 
-                            case 2:
-                                double value3 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result3 = value3 * exchangeRateNGN;
-                                countryCurrency.setText("" + df2.format(result3));
-                                break;
+                    case 8:
+                        double value9 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result9 = value9 * exchangeRateJPY;
+                        countryCurrency.setText("" + df2.format(result9));
+                        break;
 
-                            case 3:
-                                double value4 = Double.parseDouble(cryptocoins.getText().toString());
-                                Double result4 = value4 * exchangeRateCAD;
-                                countryCurrency.setText("" + df2.format(result4));
-                                break;
+                    case 9:
+                        double value10 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result10 = value10 * exchangeRateSEK;
+                        countryCurrency.setText("" + df2.format(result10));
+                        break;
 
-                            case 4:
-                                double value5 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result5 = value5 * exchangeRateGBP;
-                                countryCurrency.setText("" + df2.format(result5));
-                                break;
+                    case 10:
+                        double value11 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result11 = value11 * exchangeRateMXN;
+                        countryCurrency.setText("" + df2.format(result11));
+                        break;
 
-                            case 5:
-                                double value6 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result6 = value6 * exchangeRateCNY;
-                                countryCurrency.setText("" + df2.format(result6));
-                                break;
+                    case 11:
+                        double value12 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result12 = value12 * exchangeRateNZD;
+                        countryCurrency.setText("" + df2.format(result12));
+                        break;
 
-                            case 6:
-                                double value7 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result7 = value7 * exchangeRateCHF;
-                                countryCurrency.setText("" + df2.format(result7));
-                                break;
+                    case 12:
+                        double value13 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result13 = value13 * exchangeRateSGD;
+                        countryCurrency.setText("" + df2.format(result13));
+                        break;
 
-                            case 7:
-                                double value8 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result8 = value8 * exchangeRateAUD;
-                                countryCurrency.setText("" + df2.format(result8));
-                                break;
+                    case 13:
+                        double value14 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result14 = value14 * exchangeRateUSD;
+                        countryCurrency.setText("" + df2.format(result14));
+                        break;
 
-                            case 8:
-                                double value9 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result9 = value9 * exchangeRateJPY;
-                                countryCurrency.setText("" + df2.format(result9));
-                                break;
+                    case 14:
+                        double value15 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result15 = value15 * exchangeRateNOK;
+                        countryCurrency.setText("" + df2.format(result15));
+                        break;
 
-                            case 9:
-                                double value10 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result10 = value10 * exchangeRateSEK;
-                                countryCurrency.setText("" + df2.format(result10));
-                                break;
+                    case 15:
+                        double value16 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result16 = value16 * exchangeRateTRY;
+                        countryCurrency.setText("" + df2.format(result16));
+                        break;
 
-                            case 10:
-                                double value11 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result11 = value11 * exchangeRateMXN;
-                                countryCurrency.setText("" + df2.format(result11));
-                                break;
+                    case 16:
+                        double value17 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result17 = value17 * exchangeRateRUB;
+                        countryCurrency.setText("" + df2.format(result17));
+                        break;
 
-                            case 11:
-                                double value12 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result12 = value12 * exchangeRateNZD;
-                                countryCurrency.setText("" + df2.format(result12));
-                                break;
+                    case 17:
+                        double value18 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result18 = value18 * exchangeRateZAR;
+                        countryCurrency.setText("" + df2.format(result18));
+                        break;
 
-                            case 12:
-                                double value13 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result13 = value13 * exchangeRateSGD;
-                                countryCurrency.setText("" + df2.format(result13));
-                                break;
+                    case 18:
+                        double value19 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result19 = value19 * exchangeRateBRL;
+                        countryCurrency.setText("" + df2.format(result19));
+                        break;
 
-                            case 13:
-                                double value14 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result14 = value14 * exchangeRateUSD;
-                                countryCurrency.setText("" + df2.format(result14));
-                                break;
+                    case 19:
+                        double value20 = Double.parseDouble(cryptocoins.getText().toString());
+                        double result20 = value20 * exchangeRateMYR;
+                        countryCurrency.setText("" + df2.format(result20));
+                        break;
+                }
+            }
 
-                            case 14:
-                                double value15 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result15 = value15 * exchangeRateNOK;
-                                countryCurrency.setText("" + df2.format(result15));
-                                break;
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                            case 15:
-                                double value16 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result16 = value16 * exchangeRateTRY;
-                                countryCurrency.setText("" + df2.format(result16));
-                                break;
-
-                            case 16:
-                                double value17 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result17 = value17 * exchangeRateRUB;
-                                countryCurrency.setText("" + df2.format(result17));
-                                break;
-
-                            case 17:
-                                double value18 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result18 = value18 * exchangeRateZAR;
-                                countryCurrency.setText("" + df2.format(result18));
-                                break;
-
-                            case 18:
-                                double value19 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result19 = value19 * exchangeRateBRL;
-                                countryCurrency.setText("" + df2.format(result19));
-                                break;
-
-                            case 19:
-                                double value20 = Double.parseDouble(cryptocoins.getText().toString());
-                                double result20 = value20 * exchangeRateMYR;
-                                countryCurrency.setText("" + df2.format(result20));
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
             }
         });
+
     }
 
     private void loadBTCValue() {
