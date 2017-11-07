@@ -1,6 +1,7 @@
 package com.yosiwealth.crypto_x;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import com.squareup.otto.Subscribe;
  */
 
 public class EthTab extends Fragment {
-    Button convertETH;
+    FloatingActionButton convertETH;
     TextView ethExchange;
 
     @Override
@@ -27,7 +28,7 @@ public class EthTab extends Fragment {
 
         ethExchange = (TextView) view.findViewById(R.id.exchangeRateEth);
 
-        convertETH = (Button) view.findViewById(R.id.convertETH);
+        convertETH = (FloatingActionButton) view.findViewById(R.id.convertETH);
         convertETH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
