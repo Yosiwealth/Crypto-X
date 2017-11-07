@@ -2,6 +2,7 @@ package com.yosiwealth.crypto_x;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import com.squareup.otto.Subscribe;
 
 public class BtcTab extends Fragment {
 
-    Button convertBTC;
+    FloatingActionButton convertBTC;
     TextView btcExchange;
 
     @Override
@@ -28,7 +29,7 @@ public class BtcTab extends Fragment {
 
         btcExchange = (TextView) view.findViewById(R.id.exchangeRateBtc);
 
-        convertBTC = (Button) view.findViewById(R.id.convertBTC);
+        convertBTC = (FloatingActionButton) view.findViewById(R.id.convertBTC);
         convertBTC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
