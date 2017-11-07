@@ -32,6 +32,7 @@ public class ConvertClassETH extends AppCompatActivity {
 
     FloatingActionButton fab;
     TextView aaa;
+	TextView ghx;
     TextView bbb;
     EditText cryptocoins;
     EditText countryCurrency;
